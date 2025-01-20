@@ -13,38 +13,6 @@ if (testCoverageEnabled) {
     apply(plugin = "jacoco")
 }
 
-dependencies {
-    implementation(projects.appCommon)
-    implementation(projects.core.ui.compose.theme2.k9mail)
-    implementation(projects.core.ui.legacy.theme2.k9mail)
-    implementation(projects.feature.launcher)
-
-    implementation(projects.legacy.core)
-    implementation(projects.legacy.ui.legacy)
-
-    implementation(projects.core.featureflags)
-
-    implementation(projects.feature.widget.messageList)
-    implementation(projects.feature.widget.shortcut)
-    implementation(projects.feature.widget.unread)
-    implementation(projects.feature.telemetry.noop)
-    implementation(projects.feature.funding.noop)
-    implementation(projects.feature.onboarding.migration.noop)
-    implementation(projects.feature.migration.launcher.noop)
-
-    implementation(libs.androidx.work.runtime)
-
-    implementation(projects.feature.autodiscovery.api)
-    debugImplementation(projects.backend.demo)
-    debugImplementation(projects.feature.autodiscovery.demo)
-
-    testImplementation(libs.robolectric)
-
-    // Required for DependencyInjectionTest to be able to resolve OpenPgpApiManager
-    testImplementation(projects.plugins.openpgpApiLib.openpgpApi)
-    testImplementation(projects.feature.account.setup)
-}
-
 android {
     namespace = "com.fsck.k9"
 
@@ -53,8 +21,8 @@ android {
         testApplicationId = "com.fsck.k9.tests"
 
         versionCode = 39004
-        versionName = "9.0"
-        versionNameSuffix = "-SNAPSHOT"
+        versionName = "10.0"
+        versionNameSuffix = "a1"
 
         // Keep in sync with the resource string array "supported_languages"
         resourceConfigurations.addAll(
@@ -99,6 +67,7 @@ android {
                 "pt_PT",
                 "ro",
                 "ru",
+                "sk",
                 "sl",
                 "sq",
                 "sr",
@@ -138,6 +107,19 @@ android {
         }
     }
 
+    flavorDimensions += listOf("app")
+    productFlavors {
+        create("foss") {
+            dimension = "app"
+            buildConfigField("String", "PRODUCT_FLAVOR_APP", "\"foss\"")
+        }
+
+        create("full") {
+            dimension = "app"
+            buildConfigField("String", "PRODUCT_FLAVOR_APP", "\"full\"")
+        }
+    }
+
     packaging {
         jniLibs {
             excludes += listOf("kotlin/**")
@@ -154,11 +136,45 @@ android {
     }
 }
 
-dependencyGuard {
-    configuration("releaseRuntimeClasspath")
+dependencies {
+    implementation(projects.appCommon)
+    implementation(projects.core.ui.compose.theme2.k9mail)
+    implementation(projects.core.ui.legacy.theme2.k9mail)
+    implementation(projects.feature.launcher)
+
+    implementation(projects.legacy.core)
+    implementation(projects.legacy.ui.legacy)
+
+    implementation(projects.core.featureflags)
+
+    "fossImplementation"(projects.feature.funding.noop)
+    "fullImplementation"(projects.feature.funding.googleplay)
+    implementation(projects.feature.migration.launcher.noop)
+    implementation(projects.feature.onboarding.migration.noop)
+    implementation(projects.feature.telemetry.noop)
+    implementation(projects.feature.widget.messageList)
+    implementation(projects.feature.widget.shortcut)
+    implementation(projects.feature.widget.unread)
+
+    implementation(libs.androidx.work.runtime)
+
+    implementation(projects.feature.autodiscovery.api)
+    debugImplementation(projects.backend.demo)
+    debugImplementation(projects.feature.autodiscovery.demo)
+
+    testImplementation(libs.robolectric)
+
+    // Required for DependencyInjectionTest to be able to resolve OpenPgpApiManager
+    testImplementation(projects.plugins.openpgpApiLib.openpgpApi)
+    testImplementation(projects.feature.account.setup)
 }
 
-tasks.create("printVersionInfo") {
+dependencyGuard {
+    configuration("fossReleaseRuntimeClasspath")
+    configuration("fullReleaseRuntimeClasspath")
+}
+
+tasks.register("printVersionInfo") {
     val targetBuildType = project.findProperty("buildType") ?: "debug"
 
     doLast {

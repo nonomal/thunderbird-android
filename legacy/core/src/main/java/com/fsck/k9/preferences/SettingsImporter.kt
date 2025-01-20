@@ -9,6 +9,7 @@ import com.fsck.k9.preferences.Settings.InvalidSettingValueException
 import java.io.InputStream
 import timber.log.Timber
 
+@Suppress("LongParameterList")
 class SettingsImporter internal constructor(
     private val settingsFileParser: SettingsFileParser,
     private val generalSettingsValidator: GeneralSettingsValidator,
@@ -17,6 +18,7 @@ class SettingsImporter internal constructor(
     private val accountSettingsUpgrader: AccountSettingsUpgrader,
     private val generalSettingsWriter: GeneralSettingsWriter,
     private val accountSettingsWriter: AccountSettingsWriter,
+    private val unifiedInboxConfigurator: UnifiedInboxConfigurator,
 ) {
     /**
      * Parses an import [InputStream] and returns information on whether it contains global settings and/or account
@@ -28,7 +30,7 @@ class SettingsImporter internal constructor(
      *
      * @throws SettingsImportExportException In case of an error.
      */
-    @Suppress("TooGenericExceptionCaught")
+    @Suppress("TooGenericExceptionCaught", "ThrowsCount")
     @Throws(SettingsImportExportException::class)
     fun getImportStreamContents(inputStream: InputStream): ImportContents {
         try {
@@ -44,7 +46,10 @@ class SettingsImporter internal constructor(
                 )
             }
 
-            // TODO: throw exception if neither global settings nor account settings could be found
+            if (!globalSettings && accounts.isEmpty()) {
+                throw SettingsImportExportException("Neither global settings nor account settings could be found")
+            }
+
             return ImportContents(globalSettings, accounts)
         } catch (e: SettingsImportExportException) {
             throw e
@@ -98,6 +103,10 @@ class SettingsImporter internal constructor(
 
                     erroneousAccounts.add(AccountDescription(account.name!!, account.uuid))
                 }
+            }
+
+            if (!globalSettingsImported) {
+                unifiedInboxConfigurator.configureUnifiedInbox()
             }
 
             return ImportResults(globalSettingsImported, importedAccounts, erroneousAccounts)

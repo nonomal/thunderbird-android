@@ -3,6 +3,7 @@ package app.k9mail.feature.funding.googleplay.ui.contribution
 import android.app.Activity
 import androidx.compose.runtime.Stable
 import app.k9mail.core.ui.compose.common.mvi.UnidirectionalViewModel
+import app.k9mail.core.ui.compose.designsystem.molecule.LoadingErrorState
 import app.k9mail.feature.funding.googleplay.domain.DomainContract.BillingError
 import app.k9mail.feature.funding.googleplay.domain.entity.Contribution
 import app.k9mail.feature.funding.googleplay.domain.entity.OneTimeContribution
@@ -30,11 +31,11 @@ internal class ContributionContract {
         val oneTimeContributions: ImmutableList<OneTimeContribution> = persistentListOf(),
         val recurringContributions: ImmutableList<RecurringContribution> = persistentListOf(),
         val selectedContribution: Contribution? = null,
-        val isRecurringContributionSelected: Boolean = false,
+        val isRecurringContributionSelected: Boolean = true,
 
-        val error: BillingError? = null,
-        val isLoading: Boolean = true,
-    )
+        override val error: BillingError? = null,
+        override val isLoading: Boolean = true,
+    ) : LoadingErrorState<BillingError>
 
     sealed interface Event {
         data object OnOneTimeContributionSelected : Event
