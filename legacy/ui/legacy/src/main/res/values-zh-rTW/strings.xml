@@ -875,10 +875,18 @@
     <string name="about_app_authors_thunderbird">Thunderbird Mobile Team</string>
     <string name="push_info_notification_explanation_text">使用推送時，<xliff:g id="app_name">%1$s</xliff:g> 會保持與郵件伺服器的連接。當應用程式在背景中運行時，Android 需要顯示持續通知。<xliff:g id="optional_extended_explanation">%2$s</xliff:g></string>
     <string name="dialog_openkeychain_info_text">需要安裝 OpenKeychain 應用程式以支援端到端加密。</string>
-    <string name="account_delete_dlg_instructions_fmt">帳戶 \"<xliff:g id="account">%s</xliff:g>\" 將從 <xliff:g id="app_name">%s</xliff:g> 中移除。</string>
+    <string name="account_delete_dlg_instructions_fmt">帳戶 \"<xliff:g id="account">%1$s</xliff:g>\" 將從 <xliff:g id="app_name">%2$s</xliff:g> 中移除。</string>
     <string name="about_title">關於 <xliff:g id="app_name">%s</xliff:g></string>
     <string name="settings_ui_data_collection">數據收集</string>
     <string name="folder_settings_notifications_label">通知</string>
     <string name="settings_ui_telemetry_title">使用和技術數據</string>
     <string name="settings_ui_telemetry_description">將關於此應用程式的效能、使用情況、硬體及自訂數據與 Mozilla 共享，以幫助我們改進 Thunderbird</string>
+    <string name="volume_navigation_title_short">音量鍵導航</string>
+    <string name="save_attachment_action">儲存附件</string>
+    <string name="volume_navigation_summary">在訊息檢視中使用音量鍵在訊息之間導航</string>
+    <string name="folder_settings_push_label">啟用推送</string>
+    <string name="folder_settings_visible_label">顯示資料夾</string>
+    <string name="folder_settings_sync_label">啟用同步</string>
+    <string name="folder_list_show_hidden_folders">顯示已隱藏資料夾</string>
+    <string name="settings_list_action_support">支援 <xliff:g id="app_name">%s</xliff:g></string>
 </resources>

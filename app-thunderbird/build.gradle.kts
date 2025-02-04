@@ -21,7 +21,7 @@ android {
         testApplicationId = "net.thunderbird.android.tests"
 
         versionCode = 4
-        versionName = "8.0"
+        versionName = "10.0"
 
         // Keep in sync with the resource string array "supported_languages"
         resourceConfigurations.addAll(
@@ -67,6 +67,7 @@ android {
                 "ro",
                 "ru",
                 "sl",
+                "sk",
                 "sq",
                 "sr",
                 "sv",
@@ -78,7 +79,7 @@ android {
             ),
         )
 
-        buildConfigField("String", "CLIENT_INFO_APP_NAME", "\"Thunderbird\"")
+        buildConfigField("String", "CLIENT_INFO_APP_NAME", "\"Thunderbird for Android\"")
     }
 
     signingConfigs {
@@ -259,7 +260,7 @@ dependencyGuard {
     configuration("fullReleaseRuntimeClasspath")
 }
 
-tasks.create("printConfigurations") {
+tasks.register("printConfigurations") {
     doLast {
         configurations.forEach { configuration ->
             println("Configuration: ${configuration.name}")
@@ -270,7 +271,7 @@ tasks.create("printConfigurations") {
     }
 }
 
-tasks.create("printVersionInfo") {
+tasks.register("printVersionInfo") {
     val targetBuildType = project.findProperty("buildType") ?: "debug"
     val targetFlavorName = project.findProperty("flavorName") ?: "full"
 

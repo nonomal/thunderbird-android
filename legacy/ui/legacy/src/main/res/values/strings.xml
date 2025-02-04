@@ -24,7 +24,7 @@
     <string name="changelog_snackbar_button_text">View</string>
 
     <!-- General strings that include the app name -->
-    <string name="account_delete_dlg_instructions_fmt">The account \"<xliff:g id="account">%s</xliff:g>\" will be removed from <xliff:g id="app_name">%s</xliff:g>.</string>
+    <string name="account_delete_dlg_instructions_fmt">The account \"<xliff:g id="account">%1$s</xliff:g>\" will be removed from <xliff:g id="app_name">%2$s</xliff:g>.</string>
 
 
     <!-- === General strings ================================================================== -->
@@ -98,6 +98,7 @@
     <string name="read_receipt_enabled">Will request read receipt</string>
     <string name="read_receipt_disabled">Will not request read receipt</string>
     <string name="add_attachment_action">Add attachment</string>
+    <string name="empty_spam_action">Empty Spam</string>
     <string name="empty_trash_action">Empty Trash</string>
     <string name="expunge_action">Expunge</string>
     <string name="about_action">About</string>
@@ -236,7 +237,7 @@
     <string name="general_settings_contact_name_color_label">Contact name color</string>
 
     <string name="global_settings_messageview_fixedwidth_label">Fixed-width fonts</string>
-    <string name="global_settings_messageview_fixedwidth_summary">Use a fixed-width font when showing plain-text messages</string>
+    <string name="global_settings_messageview_fixedwidth_summary">Use a fixed-width font when showing plain text messages</string>
     <string name="global_settings_messageview_autofit_width_label">Auto-fit messages</string>
     <string name="global_settings_messageview_autofit_width_summary">Shrink messages to fit the screen</string>
 
@@ -721,6 +722,9 @@
     <string name="dialog_confirm_mark_all_as_read_title">Confirm mark all as read</string>
     <string name="dialog_confirm_mark_all_as_read_message">Do you want to mark all messages as read?</string>
 
+    <string name="dialog_confirm_empty_spam_title">Confirm empty spam</string>
+    <string name="dialog_confirm_empty_spam_message">Do you want to empty the spam folder?</string>
+
     <string name="dialog_confirm_empty_trash_title">Confirm empty trash</string>
     <string name="dialog_confirm_empty_trash_message">Do you want to empty the trash folder?</string>
 
@@ -840,6 +844,7 @@
     <string name="recipient_to">To</string>
     <string name="recipient_from">From</string>
     <string name="reply_to_label">Reply to</string>
+    <string name="expand_content_description">Expand</string>
     <string name="unknown_recipient">&lt;Unknown Recipient&gt;</string>
     <string name="unknown_sender">&lt;Unknown Sender&gt;</string>
     <string name="address_type_home">Home</string>

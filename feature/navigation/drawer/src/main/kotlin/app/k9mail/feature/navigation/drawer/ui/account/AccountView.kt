@@ -22,6 +22,7 @@ import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyMedium
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.navigation.drawer.domain.entity.DisplayAccount
 
+@Suppress("LongMethod")
 @Composable
 internal fun AccountView(
     account: DisplayAccount,
@@ -45,7 +46,8 @@ internal fun AccountView(
                 ) {
                     AccountAvatar(
                         account = account,
-                        onClick = { },
+                        onClick = null,
+                        selected = false,
                     )
                 }
             }
@@ -65,7 +67,7 @@ internal fun AccountView(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AccountIndicator(
-                accountColor = account.account.chipColor,
+                accountColor = account.color,
                 modifier = Modifier
                     .fillMaxHeight()
                     .padding(end = MainTheme.spacings.oneHalf),
@@ -74,13 +76,15 @@ internal fun AccountView(
                 verticalArrangement = Arrangement.spacedBy(MainTheme.spacings.half),
             ) {
                 TextBodyLarge(
-                    text = account.account.displayName,
+                    text = account.name,
                     color = MainTheme.colors.onSurface,
                 )
-                TextBodyMedium(
-                    text = account.account.email,
-                    color = MainTheme.colors.onSurfaceVariant,
-                )
+                if (account.name != account.email) {
+                    TextBodyMedium(
+                        text = account.email,
+                        color = MainTheme.colors.onSurfaceVariant,
+                    )
+                }
             }
         }
     }

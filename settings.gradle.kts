@@ -1,9 +1,9 @@
 pluginManagement {
     repositories {
         includeBuild("build-plugin")
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -49,6 +49,7 @@ include(
 )
 
 include(
+    ":feature:account:avatar",
     ":feature:account:common",
     ":feature:account:edit",
     ":feature:account:oauth",
@@ -176,4 +177,5 @@ include(
 
 include(
     ":library:html-cleaner",
+    ":library:TokenAutoComplete",
 )
